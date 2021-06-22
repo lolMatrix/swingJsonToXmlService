@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="test"
+        xmlns:tns="test"
+        elementFormDefault="qualified">
+
+    <element name="getPersonRequest">
+        <complexType>
+            <sequence>
+                <element name="request" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="getPersonResponse">
+        <complexType>
+            <sequence>
+                <element name="response" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="person">
+        <sequence>
+            <element name="name" type="string"/>
+            <element name="surname" type="string"/>
+            <element name="patronymic" type="string"/>
+            <element name="birthDate" type="date"/>
+            <element name="gender" type="tns:gender"/>
+            <element name="document" type="tns:document"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="document">
+        <sequence>
+            <element name="series" type="string"/>
+            <element name="number" type="string"/>
+            <element name="type" type="tns:documentType"/>
+            <element name="issueDate" type="date"/>
+        </sequence>
+    </complexType>
+
+    <simpleType name="gender">
+        <restriction base="string">
+            <enumeration value="MAN"/>
+            <enumeration value="WOMAN"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="documentType">
+        <restriction base="string">
+            <enumeration value="PASSPORT"/>
+            <enumeration value="INTERNATIONAL_PASSPORT"/>
+            <enumeration value="DRIVER"/>
+        </restriction>
+    </simpleType>
+
+    <complexType name="responsePerson" mixed="true">
+        <sequence>
+            <element name="document" type="tns:responseDocument"/>
+        </sequence>
+
+        <attribute name="name" type="string"/>
+        <attribute name="surname" type="string"/>
+        <attribute name="patronymic" type="string"/>
+        <attribute name="birthDate" type="date"/>
+        <attribute name="gender" type="tns:gender"/>
+    </complexType>
+
+    <complexType name="responseDocument">
+        <attribute name="series" type="string"/>
+        <attribute name="number" type="string"/>
+        <attribute name="type" type="tns:documentType"/>
+        <attribute name="issueDate" type="date"/>
+    </complexType>
+
+</schema>
